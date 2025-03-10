@@ -10,27 +10,35 @@ const OrderDetails = () => {
     const [error, setError] = useState(true);
     const [material, setMaterial] = useState("");
     const [article, setArticle] = useState("");
+    const [showMessage, setShowMessage] = useState(error);
 
 
     const handleConfirm = () => {
-        if (!material || !article) {
-            setError(true);
-        } else {
+        if (material && article) {
             setError(false);
             alert("Заказ подтвержден!");
+        } else if (!material && article) {
+            alert("Введите Материал");
+            setError(true);
+        } else if (!article && material) {
+            alert("Введите Артикул");
+            setError(true);
+        } else {
+            setError(true);
+            alert("Введите данные");
         }
     };
 
     const handleMaterialChange = (e: any) => {
         setMaterial(e.target.value);
-        if (e.target.value && article) {
+        if (e.target.value) {
             setError(false);
         }
     };
 
     const handleArticleChange = (e: any) => {
         setArticle(e.target.value);
-        if (material && e.target.value) {
+        if (e.target.value) {
             setError(false);
         }
     };
@@ -50,7 +58,7 @@ const OrderDetails = () => {
                 </Button>
             </Stack>
 
-            <Accordion defaultExpanded disableGutters aria-controls="panel1-content"
+            <Accordion defaultExpanded disableGutters aria-controls="panel1-content" component="form"
                        id="panel1-header" sx={{ boxShadow: "none", '&:before':{height:'0px'} }}>
                 <AccordionSummary
                     expandIcon={<ChevronLeft sx={{transform: "rotate(90deg)" }} />}
@@ -66,14 +74,14 @@ const OrderDetails = () => {
                     <Typography variant="body1" sx={{py: '10.5px'}}>Цена доставки: 2750 руб.</Typography>
 
 
-                    {error && (
+                    {showMessage && (
                         <Alert
                             severity="warning"
                             sx={{display: "flex", justifyContent: "center", alignItems: "center"}}
                             action={
                                 <IconButton
                                     aria-label="close"
-                                    onClick={() => setError(false)}
+                                    onClick={() => setShowMessage(false)}
                                 >
                                     <Close fontSize="inherit" sx={{width: "20px", height: "20px"}} />
                                 </IconButton>
@@ -86,16 +94,17 @@ const OrderDetails = () => {
                     <Accordion disableGutters aria-controls="panel2-content"
                                id="panel2-header"
                                sx={{background: "inherit", boxShadow: "none", mb: "10px", '&:before':{height:'0px'}}}>
-                        <AccordionSummary expandIcon={<ArrowDropDown />} sx={{px: 0, borderBottom: error ? "2px solid hsla(0, 65%, 51%, 1)" : "none", "& .MuiAccordionSummary-content": {m: 0}, mt: 2, mb: "2px", "&.Mui-expanded": {borderBottom: "none"}}} >
-                            <Typography sx={{ color: error ? "hsla(0, 65%, 51%, 1)" : "black"}}>Материал</Typography>
+                        <AccordionSummary expandIcon={<ArrowDropDown />} sx={{px: 0, borderBottom: !material ? "2px solid hsla(0, 65%, 51%, 1)" : "none", minHeight: "45px", height: "45px", "& .MuiAccordionSummary-content": {m: 0}, mt: 2, mb: "2px", "&.Mui-expanded": {borderBottom: "none"}}} >
+                            <Typography sx={{ color: !material ? "hsla(0, 65%, 51%, 1)" : "black"}}>Материал</Typography>
                         </AccordionSummary>
                         <AccordionDetails sx={{p: 0}}>
                             <TextField
-                            label="Материал"
-                            variant="outlined"
-                            fullWidth
-                            error={error && !material}
-                            onChange={handleMaterialChange}
+                                label="Материал"
+                                variant="outlined"
+                                fullWidth
+                                error={!material}
+                                onChange={handleMaterialChange}
+                                helperText={!material ? "Введите материал" : ""}
                             />
                         </AccordionDetails>
                     </Accordion>
@@ -103,17 +112,18 @@ const OrderDetails = () => {
                     <Accordion disableGutters aria-controls="panel3-content"
                                id="panel3-header"
                                sx={{background: "inherit", boxShadow: "none", mb: "10px", '&:before':{height:'0px'}}}>
-                        <AccordionSummary expandIcon={<ArrowDropDown />} sx={{px: 0, borderBottom: error ? "2px solid hsla(0, 65%, 51%, 1)" : "none", "& .MuiAccordionSummary-content": {m: 0}, mt: 2, mb: "2px", "&.Mui-expanded": {borderBottom: "none"}}} >
-                            <Typography sx={{ color: error ? "hsla(0, 65%, 51%, 1)" : "black" }}>Артикул</Typography>
+                        <AccordionSummary expandIcon={<ArrowDropDown />} sx={{px: 0, borderBottom: !article ? "2px solid hsla(0, 65%, 51%, 1)" : "none", minHeight: "45px", "& .MuiAccordionSummary-content": {m: 0}, mt: 2, mb: "2px", "&.Mui-expanded": {borderBottom: "none"}}} >
+                            <Typography sx={{ color: !article ? "hsla(0, 65%, 51%, 1)" : "black" }}>Артикул</Typography>
                         </AccordionSummary>
                         <AccordionDetails sx={{p: 0}}>
                             <TextField
                                 label="Артикул"
                                 variant="outlined"
                                 fullWidth
-                                error={error && !article}
+                                error={!article}
                                 sx={{ mt: 1 }}
                                 onChange={handleArticleChange}
+                                helperText={!article ? "Введите артикул" : ""}
                             />
                         </AccordionDetails>
                     </Accordion>
