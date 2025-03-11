@@ -45,11 +45,7 @@ const OrderDetails = () => {
 
 
     return (
-        <Box
-            sx={{
-                width: 360, bgcolor: "white", boxShadow: 24, mx: "auto", minHeight: "96vh"
-            }}
-        >
+        <>
             <Stack sx={{p:2, justifyContent: "start"}}>
                 <Button variant="outlined"
                         sx={{display: "flex", justifyContent: "center", alignItems: "center", width: "40px", minWidth: "40px", height: "40px", p: 0, boxShadow: 4 }}
@@ -164,7 +160,7 @@ const OrderDetails = () => {
                     Добавить
                 </Button>
             </Box>
-        </Box>
+        </>
     );
 };
 

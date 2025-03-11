@@ -2,6 +2,8 @@ import React from 'react';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "@fontsource/roboto";
 import OrderDetails from "./pages/OrderDetails";
+import ParametersForm from "./pages/ParametersForm";
+import {Box} from "@mui/material";
 
 const theme = createTheme({
     typography: {
@@ -23,7 +25,13 @@ const theme = createTheme({
 const App = () => {
     return (
         <ThemeProvider theme={theme}>
-          <OrderDetails />
+            <Box
+                sx={{
+                    width: 360, bgcolor: "white", boxShadow: 24, mx: "auto", minHeight: "96vh", position: "relative"
+                }}
+            >
+                    <ParametersForm />
+            </Box>
         </ThemeProvider>
     );
 };
