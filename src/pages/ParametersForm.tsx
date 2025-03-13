@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-import {Button, Typography, Slide, Box, Grid, IconButton, Alert, Menu} from "@mui/material";
+import {Button, Typography, Slide, Box, Grid, IconButton, Alert, Menu, Paper} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import {ArrowLeft, ArrowLeftOutlined, Check, Close, KeyboardBackspace} from "@mui/icons-material";
+import {
+    ArrowLeft,
+    ArrowLeftOutlined,
+    Check,
+    Close,
+    KeyboardBackspace,
+    PanoramaFishEye,
+    RemoveRedEye
+} from "@mui/icons-material";
 
 const ParametersForm: React.FC = () => {
     const [step, setStep] = useState(1);
@@ -86,7 +94,10 @@ const ParametersForm: React.FC = () => {
                         </IconButton>
                     }
                 >
-                    Нажмите на кнопку
+                    {step < 2 ?
+                        "Нажмите на кнопку" :
+                        "Параметры лицевой стороны"
+                    }
                 </Alert>
             </Box>
 
@@ -187,6 +198,16 @@ const ParametersForm: React.FC = () => {
                     </Box>
                 </Slide>
             )}
+
+            {step > 2 &&
+                <Box sx={{}}>
+                    <Paper sx={{width: "110px", height: "5px", margin: "4px auto 20px", background: "#78909C", boxShadow: "0"}}/>
+                    {step > 3 &&
+                        <Button startIcon={<RemoveRedEye />} fullWidth variant="outlined" sx={{textTransfrom: "uppercase", borderRadius: "20px", mb: "10px"}}>добавить панель</Button>
+                    }
+                    <Button startIcon={<Check />} fullWidth variant="contained" sx={{textTransfrom: "uppercase", borderRadius: "20px"}}>добавить панель</Button>
+                </Box>
+            }
 
             {inputMode && (
                 <Menu
