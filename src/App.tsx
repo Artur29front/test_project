@@ -4,6 +4,7 @@ import "@fontsource/roboto";
 import OrderDetails from "./pages/OrderDetails";
 import ParametersForm from "./pages/ParametersForm";
 import {Box} from "@mui/material";
+import OrdersList from "./pages/OrdersList";
 
 const theme = createTheme({
     typography: {
@@ -27,10 +28,11 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <Box
                 sx={{
-                    width: 360, bgcolor: "white", boxShadow: 24, mx: "auto", minHeight: "96vh", position: "relative"
+                    width: 360, maxWidth: "100%", bgcolor: "white", boxShadow: 24, mx: "auto", minHeight: "100vh", position: "relative"
                 }}
             >
-                    <ParametersForm />
+
+                    <OrdersList />
             </Box>
         </ThemeProvider>
     );
