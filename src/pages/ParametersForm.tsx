@@ -11,7 +11,7 @@ import {
     RemoveRedEye
 } from "@mui/icons-material";
 
-const ParametersForm: React.FC = () => {
+const ParametersForm = ({ onNext }: { onNext: () => void }) => {
     const [step, setStep] = useState(1);
     const [hasHoles, setHasHoles] = useState<boolean | null>(null);
     const [componentType, setComponentType] = useState<string | null>(null);
@@ -203,9 +203,9 @@ const ParametersForm: React.FC = () => {
                 <Box sx={{}}>
                     <Paper sx={{width: "110px", height: "5px", margin: "4px auto 20px", background: "#78909C", boxShadow: "0"}}/>
                     {step > 3 &&
-                        <Button startIcon={<RemoveRedEye />} fullWidth variant="outlined" sx={{textTransfrom: "uppercase", borderRadius: "20px", mb: "10px"}}>добавить панель</Button>
+                        <Button startIcon={<RemoveRedEye />} fullWidth variant="outlined" sx={{textTransfrom: "uppercase", borderRadius: "20px", mb: "10px"}}>Посмотреть отверстия</Button>
                     }
-                    <Button startIcon={<Check />} fullWidth variant="contained" sx={{textTransfrom: "uppercase", borderRadius: "20px"}}>добавить панель</Button>
+                    <Button startIcon={<Check />} fullWidth variant="contained" sx={{textTransfrom: "uppercase", borderRadius: "20px"}} onClick={onNext}>добавить панель</Button>
                 </Box>
             }
 

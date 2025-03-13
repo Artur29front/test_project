@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "@fontsource/roboto";
 import OrderDetails from "./pages/OrderDetails";
@@ -24,6 +24,18 @@ const theme = createTheme({
 });
 
 const App = () => {
+    const [step, setStep] = useState(0);
+
+    const handleNext = () => {
+        setStep((prev) => prev + 1);
+    };
+
+    const components = [
+        <OrderDetails onNext={handleNext} />,
+        <ParametersForm onNext={handleNext} />,
+        <OrdersList />
+    ];
+
     return (
         <ThemeProvider theme={theme}>
             <Box
@@ -31,8 +43,7 @@ const App = () => {
                     width: 360, maxWidth: "100%", bgcolor: "white", boxShadow: 24, mx: "auto", minHeight: "100vh", position: "relative"
                 }}
             >
-
-                    <OrdersList />
+                {components[step]}
             </Box>
         </ThemeProvider>
     );

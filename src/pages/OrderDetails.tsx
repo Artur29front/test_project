@@ -5,7 +5,7 @@ import {
 } from "@mui/material";
 import {ChevronLeft, Close, DeleteRounded, Check, Add, ArrowDropDown} from "@mui/icons-material";
 
-const OrderDetails = () => {
+const OrderDetails = ({ onNext }: { onNext: () => void }) => {
 
     const [error, setError] = useState(true);
     const [material, setMaterial] = useState("");
@@ -155,6 +155,7 @@ const OrderDetails = () => {
                     fullWidth
                     startIcon={<Add sx={{minWidth: "24px", minHeight: "24px"}} />}
                     size="large"
+                    onClick={onNext}
                     sx={{ mt: "10px", boxShadow: "6", borderRadius: "16px", width: "max-content", py: "12px", px: "16px" }}
                 >
                     Добавить
